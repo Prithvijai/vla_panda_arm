@@ -12,6 +12,8 @@ dependencies = [
   "gymnasium>=1.0,<2",
   "mani-skill>=3.0.0,<4",
   "numpy>=1.24,<3",
+  "opencv-python>=4.8,<5",
+  "protobuf>=6.33.5,<8",
   "pyzmq>=26,<28",
 ]
 
@@ -23,6 +25,7 @@ dev = [
 
 [project.scripts]
 pms-env-server = "panda_maniskill_vla.panda_env:main"
+pms-image-viewer = "panda_maniskill_vla.image_viewer:main"
 pms-sim-server = "panda_maniskill_vla.sim_server:main"
 
 [tool.hatch.build.targets.wheel]

@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package panda_maniskill_vla;
+
+message ActionChunkRequest {
+  uint64 sequence_id = 1;
+  repeated float values = 2 [packed = true];
+}
+
+message ActionChunkReply {
+  uint64 sequence_id = 1;
+  uint32 accepted_actions = 2;
+  string error = 3;
+}
+
+// The third ZeroMQ observation frame is tightly packed RGB8 in HWC order.
+message ObservationMetadata {
+  uint64 step_id = 1;
+  uint64 timestamp_ns = 2;
+  uint64 action_sequence_id = 3;
+  uint32 action_index = 4;
+  bool used_zero_action = 5;
+  bool is_reset = 6;
+  uint32 width = 7;
+  uint32 height = 8;
+  uint32 channels = 9;
+  repeated float qpos = 10 [packed = true];
+  repeated float qvel = 11 [packed = true];
+  repeated float tcp_pose = 12 [packed = true];
+}
