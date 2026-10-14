@@ -27,3 +27,14 @@ pms-sim-server
 ```bash
 pms-image-viewer
 ```
+
+
+## For Teleoperation
+
+Run the Panda simulation at 20 Hz with Protobuf action chunks over REQ/REP and RGB observations over PUB/SUB:
+
+```bash
+pms-teleop
+```
+<img src=docs/teleop_pick.png width="450">
+

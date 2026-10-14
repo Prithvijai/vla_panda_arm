@@ -14,6 +14,7 @@ dependencies = [
   "numpy>=1.24,<3",
   "opencv-python>=4.8,<5",
   "protobuf>=6.33.5,<8",
+  "pynput>=1.7,<2",
   "pyzmq>=26,<28",
 ]
 
@@ -27,6 +28,7 @@ dev = [
 pms-env-server = "panda_maniskill_vla.panda_env:main"
 pms-image-viewer = "panda_maniskill_vla.image_viewer:main"
 pms-sim-server = "panda_maniskill_vla.sim_server:main"
+pms-teleop = "panda_maniskill_vla.teleop:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/panda_maniskill_vla"]
