@@ -25,7 +25,6 @@ dev = [
 ]
 
 [project.scripts]
-pms-env-server = "panda_maniskill_vla.panda_env:main"
 pms-image-viewer = "panda_maniskill_vla.image_viewer:main"
 pms-sim-server = "panda_maniskill_vla.sim_server:main"
 pms-teleop = "panda_maniskill_vla.teleop:main"

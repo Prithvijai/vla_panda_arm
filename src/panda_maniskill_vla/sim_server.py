@@ -12,8 +12,7 @@ from panda_maniskill_vla.action_pb2 import (
     ActionChunkRequest,
     ObservationMetadata,
 )
-from panda_maniskill_vla.config import PandaEnvConfig
-from panda_maniskill_vla.panda_env import make_environment
+from panda_maniskill_vla.panda_env import PandaEnvConfig, make_environment_continuous
 
 ACTION_DIM = 7
 ACTION_DTYPE = np.dtype(np.float32)
@@ -32,7 +31,7 @@ def parse_args():
     parser.add_argument("--render-mode", default="human", choices=("human", "rgb_array"))
     parser.add_argument("--action-endpoint", default="tcp://127.0.0.1:5555")
     parser.add_argument("--observation-endpoint", default="tcp://127.0.0.1:5556")
-    parser.add_argument("--hz", type=float, default=20.0)
+    parser.add_argument("--hz", type=float, default=20.0, choices=(20.0, 10.0, 5.0))
     parser.add_argument("--seed", type=int, default=0)
     return parser.parse_args()
 
@@ -122,30 +121,26 @@ def encode_observation(
     return [OBSERVATION_TOPIC, metadata.SerializeToString(), rgb.tobytes()]
 
 
-def run_server(
-    config: PandaEnvConfig,
-    action_endpoint: str = "tcp://127.0.0.1:5555",
-    observation_endpoint: str = "tcp://127.0.0.1:5556",
-    hz: float = 20.0,
-    seed: int = 0,
-) -> None:
-    if hz <= 0:
-        raise ValueError("hz must be greater than zero")
-    if config.obs_mode != "rgb":
-        raise ValueError("sim server requires obs_mode='rgb'")
+def is_valid_env(env):
+    if not isinstance(env, gym.Env):
+        return False
+    if env.action_space.shape != (ACTION_DIM,):
+        return False
+    if env.action_space.dtype != ACTION_DTYPE:
+        return False
+    return True
 
-    env = make_environment(config)
-    if (
-        not isinstance(env.action_space, gym.spaces.Box)
-        or env.action_space.shape != (ACTION_DIM,)
-        or env.action_space.dtype != ACTION_DTYPE
-    ):
+def run_server(config: PandaEnvConfig) -> None:
+    
+    env = make_environment_continuous(config)
+
+    if not is_valid_env(env):
         env.close()
         raise ValueError(
             f"Expected a float32 Box action space with shape ({ACTION_DIM},)"
         )
 
-    zero_action = np.zeros(env.action_space.shape, dtype=env.action_space.dtype)
+    zero_action = np.zeros(ACTION_DIM, dtype=ACTION_DTYPE)
     pending_actions = np.empty((0, ACTION_DIM), dtype=ACTION_DTYPE)
     pending_index = 0
     pending_sequence_id = 0
@@ -158,16 +153,16 @@ def run_server(
     observation_socket.setsockopt(zmq.LINGER, 0)
     observation_socket.setsockopt(zmq.SNDHWM, 1)
 
-    period = 1.0 / hz
+    period = 1.0 / config.hz
     next_tick = time.monotonic()
 
     try:
-        action_socket.bind(action_endpoint)
-        observation_socket.bind(observation_endpoint)
-        print(f"Action server listening on {action_endpoint}")
-        print(f"Observation publisher listening on {observation_endpoint} at {hz:g} Hz")
+        action_socket.bind(config.action_endpoint)
+        observation_socket.bind(config.observation_endpoint)
+        print(f"Action server listening on {config.action_endpoint}")
+        print(f"Observation publisher listening on {config.observation_endpoint} at {config.hz:g} Hz")
 
-        observation, _ = env.reset(seed=seed)
+        observation, _ = env.reset(seed=config.seed)
         observation_socket.send_multipart(
             encode_observation(
                 observation,
@@ -235,15 +230,13 @@ def main():
         obs_mode=args.obs_mode,
         control_mode=args.control_mode,
         render_mode=args.render_mode,
-    )
-    run_server(
-        config,
         action_endpoint=args.action_endpoint,
         observation_endpoint=args.observation_endpoint,
         hz=args.hz,
         seed=args.seed,
     )
 
+    run_server(config)
 
 if __name__ == "__main__":
     main()

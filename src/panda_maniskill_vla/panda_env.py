@@ -1,27 +1,28 @@
 import argparse
+import numpy as np
 
 import gymnasium as gym
 import mani_skill.envs  # noqa: F401
-import numpy as np
+from dataclasses import dataclass
 
-from panda_maniskill_vla.config import PandaEnvConfig
+@dataclass(slots=True) # can't add attr with slots
+class PandaEnvConfig:
+    # Default sim in maniskill (Pickup cube)
+    env_id: str = "PickCube-v1"
+    robot_uid: str = "panda"
+    obs_mode: str = "rgb"
+    control_mode: str = "pd_ee_delta_pose"
+    render_mode: str | None = "rgb_array"
+    reward_mode: str = "normalized_dense"
+    sim_backend: str = "auto"
 
+    # parameters for zeroMQ server
+    action_endpoint: str = "tcp://127.0.0.1:5555",
+    observation_endpoint: str = "tcp://127.0.0.1:5556",
+    hz: float = 20.0,
+    seed: int = 0,
 
-def parse_args():
-    parser = argparse.ArgumentParser(description="Display a ManiSkill environment")
-    parser.add_argument("--env-id", type=str, default="PickCube-v1")
-    parser.add_argument("--robot", type=str, default="panda")
-    parser.add_argument("--obs-mode", type=str, default="rgb")
-    parser.add_argument("--control-mode", type=str, default="pd_ee_delta_pose")
-    parser.add_argument(
-        "--render-mode", type=str, default="human", choices=("human", "rgb_array")
-    )
-    parser.add_argument("--seed", type=int, default=0)
-
-    return parser.parse_args()
-
-
-def make_environment(config: PandaEnvConfig):
+def make_environment_continuous(config: PandaEnvConfig):
     env = gym.make(
         config.env_id,
         robot_uids=config.robot_uid,
@@ -35,29 +36,3 @@ def make_environment(config: PandaEnvConfig):
     # This application runs a continuous simulator, not fixed-length episodes.
     return env.unwrapped
 
-
-def main():
-    args = parse_args()
-    config = PandaEnvConfig(
-        env_id=args.env_id,
-        robot_uid=args.robot,
-        obs_mode=args.obs_mode,
-        control_mode=args.control_mode,
-        render_mode=args.render_mode,
-    )
-    env = make_environment(config)
-    zero_action = np.zeros(env.action_space.shape, dtype=env.action_space.dtype)
-
-    try:
-        env.reset(seed=args.seed)
-        while True:
-            env.step(zero_action)
-            env.render()
-    except KeyboardInterrupt:
-        pass
-    finally:
-        env.close()
-
-
-if __name__ == "__main__":
-    main()
