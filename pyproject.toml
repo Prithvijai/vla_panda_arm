@@ -28,6 +28,8 @@ dev = [
 pms-image-viewer = "panda_maniskill_vla.image_viewer:main"
 pms-sim-server = "panda_maniskill_vla.sim_server:main"
 pms-teleop = "panda_maniskill_vla.teleop:main"
+pms-vla = "panda_maniskill_vla.vla_client:main"
+pms-vla-report = "panda_maniskill_vla.vla_client:report_main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/panda_maniskill_vla"]

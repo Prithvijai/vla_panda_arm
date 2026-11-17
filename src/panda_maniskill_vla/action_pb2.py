@@ -25,7 +25,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n panda_maniskill_vla/action.proto\x12\x13panda_maniskill_vla\"=\n\x12\x41\x63tionChunkRequest\x12\x13\n\x0bsequence_id\x18\x01 \x01(\x04\x12\x12\n\x06values\x18\x02 \x03(\x02\x42\x02\x10\x01\"P\n\x10\x41\x63tionChunkReply\x12\x13\n\x0bsequence_id\x18\x01 \x01(\x04\x12\x18\n\x10\x61\x63\x63\x65pted_actions\x18\x02 \x01(\r\x12\r\n\x05\x65rror\x18\x03 \x01(\t\"\x85\x02\n\x13ObservationMetadata\x12\x0f\n\x07step_id\x18\x01 \x01(\x04\x12\x14\n\x0ctimestamp_ns\x18\x02 \x01(\x04\x12\x1a\n\x12\x61\x63tion_sequence_id\x18\x03 \x01(\x04\x12\x14\n\x0c\x61\x63tion_index\x18\x04 \x01(\r\x12\x18\n\x10used_zero_action\x18\x05 \x01(\x08\x12\x10\n\x08is_reset\x18\x06 \x01(\x08\x12\r\n\x05width\x18\x07 \x01(\r\x12\x0e\n\x06height\x18\x08 \x01(\r\x12\x10\n\x08\x63hannels\x18\t \x01(\r\x12\x10\n\x04qpos\x18\n \x03(\x02\x42\x02\x10\x01\x12\x10\n\x04qvel\x18\x0b \x03(\x02\x42\x02\x10\x01\x12\x14\n\x08tcp_pose\x18\x0c \x03(\x02\x42\x02\x10\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n panda_maniskill_vla/action.proto\x12\x13panda_maniskill_vla\"Z\n\x12\x41\x63tionChunkRequest\x12\x13\n\x0bsequence_id\x18\x01 \x01(\x04\x12\x12\n\x06values\x18\x02 \x03(\x02\x42\x02\x10\x01\x12\r\n\x05reset\x18\x03 \x01(\x08\x12\x0c\n\x04seed\x18\x04 \x01(\x04\"d\n\x10\x41\x63tionChunkReply\x12\x13\n\x0bsequence_id\x18\x01 \x01(\x04\x12\x18\n\x10\x61\x63\x63\x65pted_actions\x18\x02 \x01(\r\x12\r\n\x05\x65rror\x18\x03 \x01(\t\x12\x12\n\nepisode_id\x18\x04 \x01(\x04\"\xb2\x03\n\x13ObservationMetadata\x12\x0f\n\x07step_id\x18\x01 \x01(\x04\x12\x14\n\x0ctimestamp_ns\x18\x02 \x01(\x04\x12\x1a\n\x12\x61\x63tion_sequence_id\x18\x03 \x01(\x04\x12\x14\n\x0c\x61\x63tion_index\x18\x04 \x01(\r\x12\x18\n\x10used_zero_action\x18\x05 \x01(\x08\x12\x10\n\x08is_reset\x18\x06 \x01(\x08\x12\r\n\x05width\x18\x07 \x01(\r\x12\x0e\n\x06height\x18\x08 \x01(\r\x12\x10\n\x08\x63hannels\x18\t \x01(\r\x12\x10\n\x04qpos\x18\n \x03(\x02\x42\x02\x10\x01\x12\x10\n\x04qvel\x18\x0b \x03(\x02\x42\x02\x10\x01\x12\x14\n\x08tcp_pose\x18\x0c \x03(\x02\x42\x02\x10\x01\x12\x14\n\x08goal_pos\x18\r \x03(\x02\x42\x02\x10\x01\x12\x0f\n\x07success\x18\x0e \x01(\x08\x12\x12\n\nepisode_id\x18\x0f \x01(\x04\x12\x15\n\relapsed_steps\x18\x10 \x01(\r\x12\x11\n\ttruncated\x18\x11 \x01(\x08\x12\x14\n\x0c\x63\x61mera_names\x18\x12 \x03(\t\x12\x0c\n\x04seed\x18\x13 \x01(\x04\x12\x0e\n\x06reward\x18\x14 \x01(\x02\x12\x12\n\nis_grasped\x18\x15 \x01(\x08\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -40,10 +40,12 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_OBSERVATIONMETADATA'].fields_by_name['qvel']._serialized_options = b'\020\001'
   _globals['_OBSERVATIONMETADATA'].fields_by_name['tcp_pose']._loaded_options = None
   _globals['_OBSERVATIONMETADATA'].fields_by_name['tcp_pose']._serialized_options = b'\020\001'
+  _globals['_OBSERVATIONMETADATA'].fields_by_name['goal_pos']._loaded_options = None
+  _globals['_OBSERVATIONMETADATA'].fields_by_name['goal_pos']._serialized_options = b'\020\001'
   _globals['_ACTIONCHUNKREQUEST']._serialized_start=57
-  _globals['_ACTIONCHUNKREQUEST']._serialized_end=118
-  _globals['_ACTIONCHUNKREPLY']._serialized_start=120
-  _globals['_ACTIONCHUNKREPLY']._serialized_end=200
-  _globals['_OBSERVATIONMETADATA']._serialized_start=203
-  _globals['_OBSERVATIONMETADATA']._serialized_end=464
+  _globals['_ACTIONCHUNKREQUEST']._serialized_end=147
+  _globals['_ACTIONCHUNKREPLY']._serialized_start=149
+  _globals['_ACTIONCHUNKREPLY']._serialized_end=249
+  _globals['_OBSERVATIONMETADATA']._serialized_start=252
+  _globals['_OBSERVATIONMETADATA']._serialized_end=686
 # @@protoc_insertion_point(module_scope)

@@ -1,0 +1,301 @@
+{
+  "name": "smolvla_libero_prompt_k50",
+  "config": {
+    "policy": "smolvla",
+    "checkpoint": "HuggingFaceVLA/smolvla_libero",
+    "task": "pick up the red block and place it on the plate",
+    "device": "cuda",
+    "episodes": 20,
+    "first_seed": 1000,
+    "actions_per_chunk": 50,
+    "flip_images": false,
+    "state_offset": [
+      -0.043,
+      0.038,
+      0.601
+    ],
+    "state_yaw_deg": 90.0,
+    "rot_gain": 1.0,
+    "action_endpoint": "tcp://127.0.0.1:5555",
+    "observation_endpoint": "tcp://127.0.0.1:5556",
+    "name": "smolvla_libero_prompt_k50",
+    "results_dir": "results",
+    "videos": 0
+  },
+  "summary": {
+    "episodes": 20,
+    "success_rate": 0.0,
+    "success_ci95": [
+      0.0,
+      0.16113012549493322
+    ],
+    "grasp_rate": 0.0,
+    "mean_max_reward": 0.07939315997064114,
+    "mean_steps": 200.0,
+    "inference_ms_p50": 436.1514750053175,
+    "inference_ms_p95": 482.906411733711,
+    "sim_steps_per_s": 17.046101250516053
+  },
+  "episodes": [
+    {
+      "seed": 1000,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.0966678038239479,
+      "ever_grasped": false,
+      "inference_ms": [
+        1005.097854998894,
+        412.6341289957054,
+        393.94346400513314,
+        518.659884983208
+      ]
+    },
+    {
+      "seed": 1001,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.078319251537323,
+      "ever_grasped": false,
+      "inference_ms": [
+        478.44363300828263,
+        467.8207079996355,
+        436.2685660016723,
+        421.29338197992183
+      ]
+    },
+    {
+      "seed": 1002,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.06264839321374893,
+      "ever_grasped": false,
+      "inference_ms": [
+        437.57136500789784,
+        439.3616750021465,
+        426.8402209854685,
+        472.2714660165366
+      ]
+    },
+    {
+      "seed": 1003,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.12478820979595184,
+      "ever_grasped": false,
+      "inference_ms": [
+        448.5089590016287,
+        402.5274380110204,
+        558.7408130231779,
+        427.3430710018147
+      ]
+    },
+    {
+      "seed": 1004,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.06048481538891792,
+      "ever_grasped": false,
+      "inference_ms": [
+        445.20048302365467,
+        426.7022659769282,
+        434.10905002383515,
+        457.8499000053853
+      ]
+    },
+    {
+      "seed": 1005,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.06583519279956818,
+      "ever_grasped": false,
+      "inference_ms": [
+        407.2014150151517,
+        410.7018179784063,
+        445.3070939925965,
+        430.0520310061984
+      ]
+    },
+    {
+      "seed": 1006,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.0971488356590271,
+      "ever_grasped": false,
+      "inference_ms": [
+        405.98052900168113,
+        408.20990200154483,
+        384.83338500373065,
+        435.3879069967661
+      ]
+    },
+    {
+      "seed": 1007,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.07427079975605011,
+      "ever_grasped": false,
+      "inference_ms": [
+        447.13025901000947,
+        437.26881200564094,
+        447.96858498011716,
+        454.5535749930423
+      ]
+    },
+    {
+      "seed": 1008,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.08105609565973282,
+      "ever_grasped": false,
+      "inference_ms": [
+        429.36155598727055,
+        408.29239299637266,
+        420.9244580124505,
+        430.94946298515424
+      ]
+    },
+    {
+      "seed": 1009,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.10041239112615585,
+      "ever_grasped": false,
+      "inference_ms": [
+        383.9508780220058,
+        405.3607299865689,
+        431.4795329992194,
+        430.5122880032286
+      ]
+    },
+    {
+      "seed": 1010,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.06846140325069427,
+      "ever_grasped": false,
+      "inference_ms": [
+        438.29914802336134,
+        408.4391029900871,
+        424.2517160018906,
+        452.6092169980984
+      ]
+    },
+    {
+      "seed": 1011,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.0631847158074379,
+      "ever_grasped": false,
+      "inference_ms": [
+        408.47400098573416,
+        436.03438400896266,
+        407.18543698312715,
+        444.86352798412554
+      ]
+    },
+    {
+      "seed": 1012,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.063943050801754,
+      "ever_grasped": false,
+      "inference_ms": [
+        455.5241790076252,
+        408.4161320060957,
+        431.6031570197083,
+        420.6487910123542
+      ]
+    },
+    {
+      "seed": 1013,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.07620693743228912,
+      "ever_grasped": false,
+      "inference_ms": [
+        459.0173010074068,
+        467.9472599818837,
+        457.7574820141308,
+        432.6815340027679
+      ]
+    },
+    {
+      "seed": 1014,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.09209884703159332,
+      "ever_grasped": false,
+      "inference_ms": [
+        431.7521220073104,
+        442.70435100770555,
+        429.78468199726194,
+        389.6454490022734
+      ]
+    },
+    {
+      "seed": 1015,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.06575547158718109,
+      "ever_grasped": false,
+      "inference_ms": [
+        408.55544598889537,
+        443.4326259943191,
+        466.4906410034746,
+        469.7673649934586
+      ]
+    },
+    {
+      "seed": 1016,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.09304901212453842,
+      "ever_grasped": false,
+      "inference_ms": [
+        458.0607239913661,
+        436.76957799470983,
+        449.2773920064792,
+        399.95715901022777
+      ]
+    },
+    {
+      "seed": 1017,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.07849495112895966,
+      "ever_grasped": false,
+      "inference_ms": [
+        470.6133459985722,
+        481.0246499837376,
+        457.21578001393937,
+        468.61648399499245
+      ]
+    },
+    {
+      "seed": 1018,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.08573289215564728,
+      "ever_grasped": false,
+      "inference_ms": [
+        429.4482420082204,
+        439.0775659994688,
+        414.8960849852301,
+        393.75925599597394
+      ]
+    },
+    {
+      "seed": 1019,
+      "success": false,
+      "steps": 200,
+      "max_reward": 0.059304129332304,
+      "ever_grasped": false,
+      "inference_ms": [
+        538.5401049861684,
+        439.3836559902411,
+        454.4417469878681,
+        479.63133099256083
+      ]
+    }
+  ]
+}

@@ -5,15 +5,20 @@ package panda_maniskill_vla;
 message ActionChunkRequest {
   uint64 sequence_id = 1;
   repeated float values = 2 [packed = true];
+  // When true, the server resets the episode with `seed` and ignores `values`.
+  bool reset = 3;
+  uint64 seed = 4;
 }
 
 message ActionChunkReply {
   uint64 sequence_id = 1;
   uint32 accepted_actions = 2;
   string error = 3;
+  uint64 episode_id = 4;
 }
 
-// The third ZeroMQ observation frame is tightly packed RGB8 in HWC order.
+// Frames after the metadata frame are tightly packed RGB8 images in HWC order,
+// one per entry in `camera_names` and in the same order.
 message ObservationMetadata {
   uint64 step_id = 1;
   uint64 timestamp_ns = 2;
@@ -27,4 +32,13 @@ message ObservationMetadata {
   repeated float qpos = 10 [packed = true];
   repeated float qvel = 11 [packed = true];
   repeated float tcp_pose = 12 [packed = true];
+  repeated float goal_pos = 13 [packed = true];
+  bool success = 14;
+  uint64 episode_id = 15;
+  uint32 elapsed_steps = 16;
+  bool truncated = 17;
+  repeated string camera_names = 18;
+  uint64 seed = 19;
+  float reward = 20;
+  bool is_grasped = 21;
 }
